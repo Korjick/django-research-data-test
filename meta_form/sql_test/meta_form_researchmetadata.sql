@@ -1,0 +1,1 @@
+INSERT INTO meta_form_researchmetadata (id, data_provider, data_format_id, created_at, updated_at, degree_of_aggregation_id) VALUES (1, 'Technical University Dresden', 1, '2024-07-22 01:32:11.053344', '2024-07-22 01:47:43.040703', 1);

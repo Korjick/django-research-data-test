@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Metadata form
+{% endblock %}
+{% block extra_head %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="newsletter-subscribe">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Research metadata form</h2>
+            </div>
+            <form class="form-inline" method="post">
+                {% csrf_token %}
+                {% for f in form %}
+                    <div class="form-group mb-3"><label for="{{ f.id_for_label }}"
+                                                        class="mx-3">{{ f.label }}:</label>{{ f }}</div>
+                {% endfor %}
+                <div class="row-form-errors">{{ form.errors }}</div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+        <div class="container mt-3">
+            <ol class="list-group list-group-numbered">
+                {% for r in research %}
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class="fw-bold">{{ r.data_provider }}</div>
+                            <span>Created at: {{ r.created_at }}</span>
+                            <br/>
+                            <span>Data format: {{ r.data_format }}</span>
+                            <br/>
+                            <span>Degree of aggregation: {{ r.degree_of_aggregation }}</span>
+                        </div>
+                        <a class="badge text-bg-primary rounded-pill"
+                                href="{% url 'meta_form:download_metadata' metadata_id=r.pk %}">Download METADATA</a>
+                    </li>
+                {% endfor %}
+            </ol>
+        </div>
+    </div>
+{% endblock %}
