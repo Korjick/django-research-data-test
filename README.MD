@@ -63,3 +63,36 @@ Make sure you have Python 3.8 or newer and pip installed. You'll also need Djang
       URLs:
         - **/form** - This page allows you to add, view, and download research metadata.
         - **/admin** - Access the Django admin panel to manage the application, including database entries.
+
+
+## Test project
+
+### Database dump setup (Optional)
+
+Before running the tests, you can create a database dump of the relevant models using the following command:
+
+```shell
+python -Xutf8 .\manage.py dumpdata meta_form.<model_name> -o meta_form/fixtures/pluggy_server_<model_name_lower_camel_case>.json
+```
+
+Replace <model_name> with the actual name of your model and <model_name_lower_camel_case> with the camel case version 
+of the model name. For example, if your model is ResearchMetadata, the command would be:
+
+```shell
+python -Xutf8 .\manage.py dumpdata meta_form.ResearchMetadata -o meta_form/fixtures/pluggy_server_research_metadata.json
+```
+
+**MetaForm project have already had necessary dumps in *./meta_form/fixtures/* folder.** Please do additional dumps 
+only if you extend current tests and models
+
+### Running tests
+
+Once the database dump is prepared, you can run the tests using the following command:
+
+```shell
+python manage.py test meta_form
+```
+
+This command will execute all the tests defined in the meta_form application. The test results will be displayed in 
+the console, showing which tests passed, failed, or encountered errors.
+

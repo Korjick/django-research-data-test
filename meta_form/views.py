@@ -9,6 +9,8 @@ from meta_form.pluggy_specs import plugin_manager
 
 
 def index(req):
+    form = ResearchMetadataForm()
+
     if req.method == 'POST':
         form = ResearchMetadataForm(req.POST)
         if form.is_valid():
@@ -17,7 +19,7 @@ def index(req):
 
     research = ResearchMetadata.objects.all().select_related('data_format', 'degree_of_aggregation')
     return HttpResponse(render(req, 'index.html', context={
-        'form': ResearchMetadataForm(),
+        'form': form,
         'research': research
     }))
 
